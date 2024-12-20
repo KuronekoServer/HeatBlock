@@ -3,7 +3,7 @@ function serveStatusPage(res, serverIp, edition) {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-      <title>mcstatus</title>
+      <title>HeatBlock</title>
       <link rel="icon" href="https://mcstatus.is-a.dev/icon_static.png" type="image/png">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
