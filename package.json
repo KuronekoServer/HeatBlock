@@ -1,7 +1,7 @@
 {
-  "name": "mcstatus.is-a.dev",
+  "name": "HeatBlock",
   "version": "1.0.0",
-  "description": "A minecraft server status checker",
+  "description": "A easy to selfhost minecraft server status checker",
   "main": "index.js",
   "engines": {
     "node": "20.x"
