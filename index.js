@@ -6,11 +6,12 @@ const https = require('https');
 const http = require('http');
 const serveStatusPage = require('./statusPageTemplate');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
-
+app.use(cors());
 // Java Edition Pinger
 function createVarInt(value) {
   const bytes = [];
