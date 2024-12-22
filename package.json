@@ -13,6 +13,7 @@
   "author": "EducatedSuddenBucket",
   "license": "MIT",
   "dependencies": {
-    "express": "latest"
+    "express": "latest",
+    "cors": "latest"
   }
 }
