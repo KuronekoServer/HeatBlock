@@ -1,118 +1,21 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>HeatBlock</title>
   <link rel="icon" href="icon_static.png" type="image/png">
   <meta charset="UTF-8">
-    <meta name="description" content="HeatBlock - Real Time Minecraft Server Status Checker">
-    
-    <!-- Open Graph Meta Tags (for social media) -->
-    <meta property="og:title" content="HeatBlock">
-    <meta property="og:description" content="HeatBlock - Real Time Minecraft Server Status Checker">
-    <meta property="og:image" content="https://mcstatus.is-a.dev/icon.gif">
-    <meta property="og:url" content="https://mcstatus.is-a.dev/">
+  <meta name="description" content="HeatBlock - Real Time Minecraft Server Status Checker">
+  
+  <!-- Open Graph Meta Tags (for social media) -->
+  <meta property="og:title" content="HeatBlock">
+  <meta property="og:description" content="HeatBlock - Real Time Minecraft Server Status Checker">
+  <meta property="og:image" content="https://mcstatus.is-a.dev/icon.gif">
+  <meta property="og:url" content="https://mcstatus.is-a.dev/">
   <meta property="og:type" content="website">
-    <meta property="og:site_name" content="HeatBlock">
+  <meta property="og:site_name" content="HeatBlock">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Courier New', Courier, monospace;
-      margin: 0;
-      padding: 0;
-      background-color: #0d1117;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    .top-nav {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    .top-nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-size: 18px;
-      padding: 10px;
-      border-radius: 8px;
-      transition: background-color 0.3s, border-color 0.3s;
-    }
-    .top-nav a:hover, .top-nav a.active {
-      background-color: #1f2937;
-    }
-    .main-content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      overflow-y: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 600px;
-    }
-    .input-group {
-      display: flex;
-      width: 100%;
-      margin-bottom: 20px;
-      align-items: center;
-    }
-    .input-group img {
-      margin-right: 10px;
-    }
-    input[type="text"] {
-      flex-grow: 1;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #161b22;
-      color: #c9d1d9;
-      border: 1px solid #30363d;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #238636;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    .server-info {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    .server-info img {
-      margin-right: 20px;
-    }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      color: #2196F3;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .edition-switch {
-      margin-top: 10px;
-    }
-    .edition-switch label {
-      margin-right: 10px;
-      cursor: pointer;
-    }
-  </style>
+<link rel="stylesheet" href="style.css">
+	
 </head>
 <body>
   <div class="top-nav">
@@ -136,7 +39,9 @@
       </div>
     </form>
     <div id="result" class="server-info"></div>
-    <div class="footer" onclick="window.location.href='https://github.com/EducatedSuddenBucket'">Made By EducatedSuddenBucket</div>
+  </div>
+  <div class="footer" onclick="window.location.href='https://github.com/EducatedSuddenBucket'">
+    Made By EducatedSuddenBucket
   </div>
   <script>
     function navigateToServer(event) {
