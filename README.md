@@ -17,7 +17,7 @@ A powerful and easy-to-use Minecraft server status checker with both API and UI 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/heatblock.git
+git clone https://github.com/HeatBlock/HeatBlock.git
 
 # Navigate to the project directory
 cd heatblock
