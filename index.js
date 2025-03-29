@@ -2,8 +2,6 @@ const express = require('express');
 const net = require('net');
 const dns = require('dns');
 const dgram = require('dgram');
-const https = require('https');
-const http = require('http');
 const serveStatusPage = require('./statusPageTemplate');
 const app = express();
 const cors = require('cors');
@@ -282,6 +280,11 @@ function extractText(obj) {
   return text;
 }
 
+function removeColorCodes(text) {
+  // Remove all Minecraft formatting codes (§ followed by any character)
+  return text.replace(/§[0-9a-fklmnor]/gi, '');
+}
+
 function getColorCode(colorName) {
   const colorCodes = {
     black: '0',
@@ -351,29 +354,6 @@ async function resolveAndConnect(host, port, isJava = true) {
   }
 }
 
-function fetchImage(url) {
-  return new Promise((resolve, reject) => {
-    const protocol = url.startsWith('https') ? https : http;
-    protocol
-      .get(url, (response) => {
-        if (response.statusCode === 200) {
-          let data = [];
-          response.on('data', (chunk) => {
-            data.push(chunk);
-          });
-          response.on('end', () => {
-            resolve(Buffer.concat(data));
-          });
-        } else {
-          reject(new Error(`HTTP Status Code: ${response.statusCode}`));
-        }
-      })
-      .on('error', (err) => {
-        reject(err);
-      });
-  });
-}
-
 app.get('/api/png/:serverip', async (req, res) => {
   const serverip = req.params.serverip;
   let [serverHost, serverPort] = serverip.split(':');
@@ -381,36 +361,53 @@ app.get('/api/png/:serverip', async (req, res) => {
 
   try {
     const response = await resolveAndConnect(serverHost, serverPort);
-    if (response.favicon) {
-      if (response.favicon.startsWith('data:image/png;base64,')) {
-        const faviconData = response.favicon.split(',')[1];
-        const faviconBuffer = Buffer.from(faviconData, 'base64');
-        res.set('Content-Type', 'image/png');
-        res.send(faviconBuffer);
-      } else if (response.favicon.startsWith('http://') || response.favicon.startsWith('https://')) {
-        try {
-          const imageBuffer = await fetchImage(response.favicon);
-          res.set('Content-Type', 'image/png');
-          res.send(imageBuffer);
-        } catch (err) {
-          console.error('Error fetching image:', err);
-          res.json({ error: 'cant_get_favicon' });
-        }
-      } else {
-        res.json({ error: 'invalid_favicon' });
-      }
+    if (response.favicon && response.favicon.startsWith('data:image/png;base64,')) {
+      const faviconData = response.favicon.split(',')[1];
+      const faviconBuffer = Buffer.from(faviconData, 'base64');
+      res.set('Content-Type', 'image/png');
+      res.send(faviconBuffer);
     } else {
-      res.json({ error: 'no_favicon' });
+      res.json({ 
+        success: false, 
+        error: {
+          code: 'no_favicon',
+          message: 'Server does not have a favicon'
+        }
+      });
     }
   } catch (err) {
     console.error(err);
+    let errorResponse = {
+      success: false,
+      error: {
+        code: 'unknown_error',
+        message: 'Failed to connect to the server'
+      }
+    };
+
     if (err.code === 'TIMEOUT') {
-      res.json({ error: 'timeout' });
+      errorResponse.error = {
+        code: 'timeout',
+        message: 'Connection to server timed out'
+      };
     } else if (err.code === 'ENOTFOUND' || err.code === 'EAI_AGAIN') {
-      res.json({ error: 'domain_not_found' });
+      errorResponse.error = {
+        code: 'invalid_domain',
+        message: 'The domain name could not be resolved'
+      };
+    } else if (err.code === 'ECONNREFUSED') {
+      errorResponse.error = {
+        code: 'connection_refused',
+        message: 'Server refused the connection'
+      };
     } else {
-      res.json({ error: 'offline' });
+      errorResponse.error = {
+        code: 'offline',
+        message: 'Server appears to be offline or unreachable'
+      };
     }
+
+    res.json(errorResponse);
   }
 });
 
@@ -428,6 +425,7 @@ app.get('/api/status/:serverAddress', async (req, res) => {
     }
 
     const serverInfo = {
+      success: true,
       version: response.version,
       players: {
         max: response.players.max,
@@ -435,6 +433,7 @@ app.get('/api/status/:serverAddress', async (req, res) => {
         list: response.players.sample || []
       },
       description: description,
+      description_clean: removeColorCodes(description),
       latency: response.latency,
       favicon: response.favicon
     };
@@ -442,13 +441,37 @@ app.get('/api/status/:serverAddress', async (req, res) => {
     res.json(serverInfo);
   } catch (err) {
     console.error(err);
+    let errorResponse = {
+      success: false,
+      error: {
+        code: 'unknown_error',
+        message: 'Failed to connect to the server'
+      }
+    };
+
     if (err.code === 'TIMEOUT') {
-      res.json({ error: 'timeout' });
+      errorResponse.error = {
+        code: 'timeout',
+        message: 'Connection to server timed out'
+      };
     } else if (err.code === 'ENOTFOUND' || err.code === 'EAI_AGAIN') {
-      res.json({ error: 'domain_not_found' });
+      errorResponse.error = {
+        code: 'invalid_domain',
+        message: 'The domain name could not be resolved'
+      };
+    } else if (err.code === 'ECONNREFUSED') {
+      errorResponse.error = {
+        code: 'connection_refused',
+        message: 'Server refused the connection'
+      };
     } else {
-      res.json({ error: 'offline' });
+      errorResponse.error = {
+        code: 'offline',
+        message: 'Server appears to be offline or unreachable'
+      };
     }
+
+    res.json(errorResponse);
   }
 });
 
@@ -459,7 +482,9 @@ app.get('/api/status/bedrock/:serverAddress', async (req, res) => {
   try {
     const response = await resolveAndConnect(serverHost, port, false);
     const serverInfo = {
+      success: true,
       motd: response.motd,
+      motd_clean: removeColorCodes(response.motd),
       levelName: response.worldname,
       playersOnline: response.playersOnline,
       playersMax: response.playersMax,
@@ -473,13 +498,37 @@ app.get('/api/status/bedrock/:serverAddress', async (req, res) => {
     res.json(serverInfo);
   } catch (error) {
     console.error('Ping failed:', error);
+    let errorResponse = {
+      success: false,
+      error: {
+        code: 'unknown_error',
+        message: 'Failed to connect to the server'
+      }
+    };
+
     if (error.code === 'TIMEOUT') {
-      res.json({ error: 'timeout' });
+      errorResponse.error = {
+        code: 'timeout',
+        message: 'Connection to server timed out'
+      };
     } else if (error.code === 'ENOTFOUND' || error.code === 'EAI_AGAIN') {
-      res.json({ error: 'domain_not_found' });
+      errorResponse.error = {
+        code: 'invalid_domain',
+        message: 'The domain name could not be resolved'
+      };
+    } else if (error.code === 'ECONNREFUSED') {
+      errorResponse.error = {
+        code: 'connection_refused',
+        message: 'Server refused the connection'
+      };
     } else {
-      res.json({ error: 'offline' });
+      errorResponse.error = {
+        code: 'offline',
+        message: 'Server appears to be offline or unreachable'
+      };
     }
+
+    res.json(errorResponse);
   }
 });
 

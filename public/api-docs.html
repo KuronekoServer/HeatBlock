@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/style.css">
-<link rel="canonical" href="https://heatblock.esb.is-a.dev/api/docs">
+  <link rel="canonical" href="https://heatblock.esb.is-a.dev/api/docs">
 </head>
 <body>
   <div class="top-nav">
@@ -22,6 +22,7 @@
       <p><strong>Method:</strong> GET</p>
       <p><strong>Success Response:</strong></p>
       <pre>{
+  "success": true,
   "version": {
     "name": "1.16.5",
     "protocol": 754
@@ -41,18 +42,38 @@
     ]
   },
   "description": "A Minecraft Server",
+  "description_clean": "A Minecraft Server",
   "latency": 123,
   "favicon": "data:image/png;base64,..."
 }</pre>
       <p><strong>Error Responses:</strong></p>
       <pre>{
-  "error": "timeout"
+  "success": false,
+  "error": {
+    "code": "timeout",
+    "message": "Connection to server timed out"
+  }
 }</pre>
       <pre>{
-  "error": "domain_not_found"
+  "success": false,
+  "error": {
+    "code": "invalid_domain",
+    "message": "The domain name could not be resolved"
+  }
 }</pre>
       <pre>{
-  "error": "offline"
+  "success": false,
+  "error": {
+    "code": "connection_refused",
+    "message": "Server refused the connection"
+  }
+}</pre>
+      <pre>{
+  "success": false,
+  "error": {
+    "code": "offline",
+    "message": "Server appears to be offline or unreachable"
+  }
 }</pre>
     </div>
     <div class="api-section">
@@ -62,25 +83,39 @@
       <p><strong>Success Response:</strong> Image (PNG)</p>
       <p><strong>Error Responses:</strong></p>
       <pre>{
-  "error": "timeout"
+  "success": false,
+  "error": {
+    "code": "timeout",
+    "message": "Connection to server timed out"
+  }
 }</pre>
       <pre>{
-  "error": "domain_not_found"
+  "success": false,
+  "error": {
+    "code": "invalid_domain",
+    "message": "The domain name could not be resolved"
+  }
 }</pre>
       <pre>{
-  "error": "offline"
+  "success": false,
+  "error": {
+    "code": "connection_refused",
+    "message": "Server refused the connection"
+  }
 }</pre>
-      
       <pre>{
-  "error": "no_favicon"
+  "success": false,
+  "error": {
+    "code": "offline",
+    "message": "Server appears to be offline or unreachable"
+  }
 }</pre>
-      
       <pre>{
-  "error": "invalid_favicon"
-}</pre>
-      
-      <pre>{
-  "error": "cant_fetch_favicon"
+  "success": false,
+  "error": {
+    "code": "no_favicon",
+    "message": "Server does not have a favicon"
+  }
 }</pre>
     </div>
     <div class="api-section">
@@ -89,7 +124,9 @@
       <p><strong>Method:</strong> GET</p>
       <p><strong>Success Response:</strong></p>
       <pre>{
+  "success": true,
   "motd": "Dedicated Server",
+  "motd_clean": "Dedicated Server",
   "levelName": "Bedrock level",
   "playersOnline": 0,
   "playersMax": 10,
@@ -101,13 +138,32 @@
 }</pre>
       <p><strong>Error Responses:</strong></p>
       <pre>{
-  "error": "timeout"
+  "success": false,
+  "error": {
+    "code": "timeout",
+    "message": "Connection to server timed out"
+  }
 }</pre>
       <pre>{
-  "error": "domain_not_found"
+  "success": false,
+  "error": {
+    "code": "invalid_domain",
+    "message": "The domain name could not be resolved"
+  }
 }</pre>
       <pre>{
-  "error": "offline"
+  "success": false,
+  "error": {
+    "code": "connection_refused",
+    "message": "Server refused the connection"
+  }
+}</pre>
+      <pre>{
+  "success": false,
+  "error": {
+    "code": "offline",
+    "message": "Server appears to be offline or unreachable"
+  }
 }</pre>
     </div>
   </div>

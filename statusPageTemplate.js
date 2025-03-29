@@ -7,8 +7,7 @@ function serveStatusPage(res, serverIp, edition) {
       <link rel="icon" href="https://mcstatus.is-a.dev/icon_static.png" type="image/png">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
-
+      <link rel="stylesheet" href="/style.css">
     </head>
     <body>
       <div class="top-nav">
@@ -31,7 +30,13 @@ function serveStatusPage(res, serverIp, edition) {
             <input type="radio" name="edition" value="bedrock" ${edition === 'bedrock' ? 'checked' : ''}> Bedrock
           </label>
         </div>
-        <div id="result" class="server-info"></div>
+        <div id="loading" class="loading-container">
+          <svg class="container" viewBox="0 0 40 40" height="40" width="40">
+            <circle class="track" cx="20" cy="20" r="17.5" pathlength="100" stroke-width="5px" fill="none" />
+            <circle class="car" cx="20" cy="20" r="17.5" pathlength="100" stroke-width="5px" fill="none" />
+          </svg>
+        </div>
+        <div id="result" class="server-info" style="display: none;"></div>
         <div class="footer" onclick="window.location.href='https://github.com/EducatedSuddenBucket'">Made By EducatedSuddenBucket</div>
       </div>
       <script>
@@ -104,35 +109,26 @@ function serveStatusPage(res, serverIp, edition) {
         async function getStatus() {
           const serverIp = "${serverIp}";
           const edition = "${edition}";
+          const loadingDiv = document.getElementById('loading');
           const resultDiv = document.getElementById('result');
+          
+          loadingDiv.style.display = 'flex';
+          resultDiv.style.display = 'none';
           resultDiv.innerHTML = '';
 
           try {
             const response = await fetch(edition === 'bedrock' ? '/api/status/bedrock/' + serverIp : '/api/status/' + serverIp);
             const status = await response.json();
+            
+            loadingDiv.style.display = 'none';
+            resultDiv.style.display = 'flex';
 
-            // Handle error responses based on the error field
-            if (status.error) {
-              let errorMessage;
-              switch (status.error) {
-                case 'timeout':
-                  errorMessage = 'The server did not respond in time (timeout).';
-                  break;
-                case 'domain_not_found':
-                  errorMessage = 'The server domain could not be found (domain not found).';
-                  break;
-                case 'offline':
-                  errorMessage = 'The server is offline or unreachable.';
-                  break;
-                default:
-                  errorMessage = 'An unexpected error occurred.';
-                  break;
-              }
-              resultDiv.innerHTML = \`<p>\${errorMessage}</p>\`;
+            // Handle error responses based on the updated API
+            if (!status.success) {
+              resultDiv.innerHTML = \`<p>\${status.error.message}</p>\`;
               return;
             }
 
-            
             if (edition === 'java') {
               let playerList = '';
               if (status.players && status.players.list && status.players.list.length > 0) {
@@ -173,6 +169,8 @@ function serveStatusPage(res, serverIp, edition) {
             }
           } catch (error) {
             console.error('Error fetching server status:', error);
+            loadingDiv.style.display = 'none';
+            resultDiv.style.display = 'flex';
             resultDiv.innerHTML = '<p>An error occurred while fetching the server status.</p>';
           }
         }
