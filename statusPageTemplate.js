@@ -4,7 +4,7 @@ function serveStatusPage(res, serverIp, edition) {
     <html lang="en">
     <head>
       <title>HeatBlock</title>
-      <link rel="icon" href="https://mcstatus.is-a.dev/icon_static.png" type="image/png">
+      <link rel="icon" href="https://heatblock.esb.is-a.dev/icon_static.png" type="image/png">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="/style.css">
