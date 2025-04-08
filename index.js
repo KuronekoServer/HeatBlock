@@ -238,9 +238,13 @@ function pingBedrockServer(host, port) {
 
 function extractText(obj) {
   let text = '';
+  
+  // Handle plain string
   if (typeof obj === 'string') {
     return obj;
   }
+  
+  // Handle color and formatting codes
   if (obj.color) {
     text += `§${getColorCode(obj.color)}`;
   }
@@ -259,24 +263,35 @@ function extractText(obj) {
   if (obj.obfuscated) {
     text += '§k';
   }
+  
+  // Add text content
   if (obj.text) {
-    if (
-      !obj.color &&
-      !obj.bold &&
-      !obj.italic &&
-      !obj.underline &&
-      !obj.strikethrough &&
-      !obj.obfuscated
-    ) {
-      text += '§r';
-    }
     text += obj.text;
   }
+  
+  // Process extra array with proper reset codes
   if (obj.extra) {
-    for (let item of obj.extra) {
+    for (let i = 0; i < obj.extra.length; i++) {
+      const item = obj.extra[i];
+      const hasFormatting = item.color || item.bold || item.italic || 
+                          item.underline || item.strikethrough || item.obfuscated;
+      
+      // Add reset code between elements in the extra array if needed
+      if (i > 0) {
+        const prevItem = obj.extra[i - 1];
+        const prevHasFormatting = prevItem.color || prevItem.bold || prevItem.italic || 
+                               prevItem.underline || prevItem.strikethrough || prevItem.obfuscated;
+        
+        if (prevHasFormatting) {
+          text += '§r';
+        }
+      }
+      
+      // Process the item recursively
       text += extractText(item);
     }
   }
+  
   return text;
 }
 
