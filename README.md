@@ -43,7 +43,7 @@ Here are our publicly available instances:
 
 | Location | URL | Provider |
 |----------|-----|----------|
-| Singapore | [sg.heatblock.esb.is-a.dev](https://sg.heatblock.esb.is-a.dev) | Marscode |
+| Singapore | [sg.heatblock.esb.is-a.dev](https://sg.heatblock.esb.is-a.dev) | Railway |
 | USA | [us.heatblock.esb.is-a.dev](https://us.heatblock.esb.is-a.dev) | Huggingface |
 | India | [in.heatblock.esb.is-a.dev](https://in.heatblock.esb.is-a.dev) | Vercel |
 | Germany | [de.heatblock.esb.is-a.dev](https://de.heatblock.esb.is-a.dev) | Render |
