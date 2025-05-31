@@ -30,6 +30,10 @@
     {
       "src": "/script.js",
       "dest": "/public/script.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
     }
   ],
   "regions": ["bom1"]
