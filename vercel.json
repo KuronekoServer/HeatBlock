@@ -25,7 +25,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/public/$1"
     }
   ],
   "regions": ["bom1"]
