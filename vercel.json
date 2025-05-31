@@ -23,6 +23,10 @@
       "src": "/icon_static.png",
       "dest": "/public/icon_static.png"
     },
+            {
+      "src": "/*",
+      "dest": "/public/*"
+    },
     {
       "src": "/(.*)",
       "dest": "/"
