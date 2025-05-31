@@ -24,7 +24,7 @@
       "dest": "/public/icon_static.png"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot))",
       "dest": "/public/$1"
     }
   ],
