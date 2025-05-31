@@ -24,8 +24,12 @@
       "dest": "/public/icon_static.png"
     },
     {
-      "src": "/(.*\\.(?:css|js|png|jpg|jpeg|gif|svg|ico|webp|woff2?|ttf|eot))",
-      "dest": "/public/$1"
+      "src": "/font.woff2",
+      "dest": "/public/font.woff2"
+    },
+    {
+      "src": "/script.js",
+      "dest": "/public/script.js"
     }
   ],
   "regions": ["bom1"]
