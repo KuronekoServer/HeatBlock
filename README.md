@@ -47,3 +47,4 @@ Here are our publicly available instances:
 | USA | [us.heatblock.esb.is-a.dev](https://us.heatblock.esb.is-a.dev) | Huggingface |
 | India | [in.heatblock.esb.is-a.dev](https://in.heatblock.esb.is-a.dev) | Vercel |
 | Germany | [de.heatblock.esb.is-a.dev](https://de.heatblock.esb.is-a.dev) | Render |
+| France | [heatblock.skyexplorewt.xyz](https://heatblock.skyexplorewt.xyz) | Self-hosted by [@SkyExploreWasTaken](https://github.com/SkyExploreWasTaken) |
