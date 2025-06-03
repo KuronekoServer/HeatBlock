@@ -1,40 +1,11 @@
 {
-  "version": 2,
   "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
+    { "src": "index.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
   ],
-  "routes": [
-    {
-      "src": "/style.css",
-      "dest": "/public/style.css"
-    },
-        {
-      "src": "/icon.gif",
-      "dest": "/public/icon.gif"
-    },
-        {
-      "src": "/icon_static.png",
-      "dest": "/public/icon_static.png"
-    },
-    {
-      "src": "/font.woff2",
-      "dest": "/public/font.woff2"
-    },
-    {
-      "src": "/script.js",
-      "dest": "/public/script.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/public/$1" },
+    { "source": "/(.*)", "destination": "/" }
   ],
   "regions": ["bom1"]
 }
