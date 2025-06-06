@@ -254,7 +254,7 @@ function extractText(obj) {
   if (obj.italic) {
     text += '§o';
   }
-  if (obj.underline) {
+  if (obj.underlined) {
     text += '§n';
   }
   if (obj.strikethrough) {
