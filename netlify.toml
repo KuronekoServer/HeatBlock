@@ -1,0 +1,11 @@
+[functions]
+  node_bundler = "esbuild"
+  directory = "."
+[[redirects]]
+  force = false
+  from = "/*"
+  status = 200
+  to = "/.netlify/functions/serverless-handler/:splat"
+
+[build]
+  publish = "public"
