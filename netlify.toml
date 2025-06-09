@@ -10,3 +10,4 @@
 
 [build]
   publish = "public"
+  command = "npm install serverless-http"
