@@ -1,6 +1,7 @@
 [functions]
   node_bundler = "esbuild"
   directory = "."
+  external_node_modules = ["serverless-http"]
 [[redirects]]
   force = false
   from = "/*"
