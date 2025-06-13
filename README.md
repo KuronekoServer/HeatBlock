@@ -2,14 +2,6 @@
 
 A powerful and easy-to-use Minecraft server status checker with both API and UI interfaces. HeatBlock allows you to quickly check the status, player count, and other vital information of any Minecraft server.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://dashboard.render.com/blueprint/new)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project)
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy)
-
 ## Features
 
 - Real-time server status checking
@@ -21,7 +13,7 @@ A powerful and easy-to-use Minecraft server status checker with both API and UI 
 
 ## Hosted Versions
 
-Here are our publicly available instances:
+Here are the publicly available instances:
 
 | Location | URL | Provider |
 |----------|-----|----------|
