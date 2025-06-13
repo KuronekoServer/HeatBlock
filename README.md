@@ -33,10 +33,10 @@ git clone https://github.com/HeatBlock/HeatBlock.git
 cd heatblock
 
 # Install dependencies
-npm install
+npm i
 
 # Start the server
-node index.js
+npm start
 ```
 
 The server will start running on `http://localhost:3000` (or your configured port).
