@@ -1,7 +1,8 @@
 {
   "name": "HeatBlock",
   "version": "1.0.0",
-  "description": "A easy to selfhost minecraft server status checker",
+  "description": "A minecraft server status checker",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
