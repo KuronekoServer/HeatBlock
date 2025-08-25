@@ -1,198 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>HeatBlock - API Docs</title>
-  <meta name="description" content="HeatBlock - API Docs">
-  <link rel="icon" href="https://heatblock.esb.is-a.dev/icon_static.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="canonical" href="https://heatblock.esb.is-a.dev/api/docs">
-  <meta name="keywords" content="Minecraft, server status, Minecraft server checker, Java server, Bedrock server, game servers, online status, multiplayer, Minecraft status, server ping, Minecraft tools">
+  <title>HeatBlock API Documentation</title>
+  <link rel="icon" href="/icon_static.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .code { font-family: 'JetBrains Mono', monospace; }
+  </style>
 </head>
-<body>
-  <div class="top-nav">
-    <div class="nav-left">
-      <a href="/">Home</a>
-      <a href="/api/docs" class="active">API</a>
-    </div>
-    <div class="nav-right">
-      <a href="https://github.com/HeatBlock/HeatBlock" class="github-link" aria-label="GitHub Repository">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="github-icon">
-          <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
-        </svg>
-      </a>
-      <label class="theme-switcher" for="theme-toggle">
-        <input type="checkbox" id="theme-toggle" class="theme-checkbox">
-        <div class="slider">
-          <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/>
-          </svg>
-          <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-            <path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/>
-          </svg>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+  <!-- Navigation -->
+  <nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-8">
+          <div class="flex items-center space-x-2">
+            <img src="/icon.gif" width="24" height="24" alt="HeatBlock" class="rounded">
+            <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">HeatBlock</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-4">
+            <a href="/" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Home</a>
+            <a href="/api/docs" class="px-3 py-2 rounded-lg text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">API</a>
+          </div>
         </div>
-      </label>
+        
+        <div class="flex items-center space-x-4">
+          <!-- GitHub Link -->
+          <a href="https://github.com/HeatBlock/HeatBlock" 
+             class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+             aria-label="GitHub Repository">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+          
+          <!-- Theme Toggle -->
+          <button id="theme-toggle" 
+                  class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="main-content">
-    <div class="api-section">
-      <h2>Java Server Status</h2>
-      <p><strong>Endpoint:</strong> <code>/api/status/:serverAddress</code></p>
-      <p><strong>Method:</strong> GET</p>
-      <p><strong>Success Response:</strong></p>
-      <pre>{
+  </nav>
+
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">
+        <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">HeatBlock API</span>
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        REST API for getting Minecraft server status information for both Java and Bedrock editions
+      </p>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 text-slate-900 dark:text-slate-100">🚀 Quick Start</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Java Edition</h3>
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">GET Request:</p>
+            <code class="code text-sm text-blue-600 dark:text-blue-400 break-all">
+              /api/status/hypixel.net
+            </code>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Bedrock Edition</h3>
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+            <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">GET Request:</p>
+            <code class="code text-sm text-blue-600 dark:text-blue-400 break-all">
+              /api/status/bedrock/play.cubecraft.net
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endpoints -->
+    <div class="space-y-8">
+      <!-- Java Edition Endpoint -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">GET</span>
+          <code class="code text-lg font-semibold text-slate-900 dark:text-slate-100">/api/status/{serverAddress}</code>
+        </div>
+        
+        <p class="text-slate-600 dark:text-slate-400 mb-6">
+          Get status information for a Minecraft Java Edition server.
+        </p>
+        
+        <div class="space-y-6">
+          <!-- Parameters -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Parameters</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <div class="flex items-center gap-3 mb-2">
+                <code class="code text-sm bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded">serverAddress</code>
+                <span class="text-xs text-slate-500 dark:text-slate-400">string</span>
+                <span class="text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-2 py-1 rounded">required</span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Server hostname or IP address. Can include port (e.g., "example.com:25565"). Default port is 25565.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Example Response -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Example Response</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <pre class="code text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"><code>{
   "success": true,
   "version": {
-    "name": "1.16.5",
-    "protocol": 754
+    "name": "1.20.1",
+    "protocol": 763
   },
   "players": {
-    "max": 20,
-    "online": 5,
-    "list": [
-      {
-        "name": "EducatedSuddenBucket",
-        "id": "uuid1"
-      },
-      {
-        "name": "SomeoneElseInTheServer",
-        "id": "uuid2"
-      }
-    ]
+    "max": 100000,
+    "online": 45678,
+    "list": []
   },
-  "description": "A Minecraft Server",
-  "description_clean": "A Minecraft Server",
-  "latency": 123,
+  "description": "§aHypixel Network §c[1.8-1.20]",
+  "description_clean": "Hypixel Network [1.8-1.20]",
+  "latency": 45,
   "favicon": "data:image/png;base64,..."
-}</pre>
-      <p><strong>Error Responses:</strong></p>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "timeout",
-    "message": "Connection to server timed out"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "invalid_domain",
-    "message": "The domain name could not be resolved"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "connection_refused",
-    "message": "Server refused the connection"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "offline",
-    "message": "Server appears to be offline or unreachable"
-  }
-}</pre>
-    </div>
-    <div class="api-section">
-      <h2>Server Icon (Java Only)</h2>
-      <p><strong>Endpoint:</strong> <code>/api/png/:serverip</code></p>
-      <p><strong>Method:</strong> GET</p>
-      <p><strong>Success Response:</strong> Image (PNG)</p>
-      <p><strong>Error Responses:</strong></p>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "timeout",
-    "message": "Connection to server timed out"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "invalid_domain",
-    "message": "The domain name could not be resolved"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "connection_refused",
-    "message": "Server refused the connection"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "offline",
-    "message": "Server appears to be offline or unreachable"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "no_favicon",
-    "message": "Server does not have a favicon"
-  }
-}</pre>
-    </div>
-    <div class="api-section">
-      <h2>Bedrock Server Status</h2>
-      <p><strong>Endpoint:</strong> <code>/api/status/bedrock/:serverAddress</code></p>
-      <p><strong>Method:</strong> GET</p>
-      <p><strong>Success Response:</strong></p>
-      <pre>{
+}</code></pre>
+            </div>
+          </div>
+          
+          <!-- Try it out -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Try it out</h4>
+            <div class="flex gap-3">
+              <input type="text" id="java-server" placeholder="Enter server address (e.g., hypixel.net)" 
+                     class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button onclick="testJavaServer()" 
+                      class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                Test
+              </button>
+            </div>
+            <div id="java-result" class="mt-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bedrock Edition Endpoint -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">GET</span>
+          <code class="code text-lg font-semibold text-slate-900 dark:text-slate-100">/api/status/bedrock/{serverAddress}</code>
+        </div>
+        
+        <p class="text-slate-600 dark:text-slate-400 mb-6">
+          Get status information for a Minecraft Bedrock Edition server.
+        </p>
+        
+        <div class="space-y-6">
+          <!-- Parameters -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Parameters</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <div class="flex items-center gap-3 mb-2">
+                <code class="code text-sm bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded">serverAddress</code>
+                <span class="text-xs text-slate-500 dark:text-slate-400">string</span>
+                <span class="text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-2 py-1 rounded">required</span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Server hostname or IP address. Can include port (e.g., "example.com:19132"). Default port is 19132.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Example Response -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Example Response</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <pre class="code text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"><code>{
   "success": true,
-  "motd": "Dedicated Server",
-  "motd_clean": "Dedicated Server",
-  "levelName": "Bedrock level",
-  "playersOnline": 0,
-  "playersMax": 10,
+  "motd": "CubeCraft Games",
+  "motd_clean": "CubeCraft Games",
+  "levelName": "world",
+  "playersOnline": 15234,
+  "playersMax": 50000,
   "gamemode": "Survival",
-  "serverId": "13460148391903423507",
-  "protocol": "486",
-  "version": "1.18.0",
-  "latency": 50
-}</pre>
-      <p><strong>Error Responses:</strong></p>
-      <pre>{
+  "serverId": "123456789",
+  "protocol": 594,
+  "version": "1.20.10",
+  "latency": 67
+}</code></pre>
+            </div>
+          </div>
+          
+          <!-- Try it out -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Try it out</h4>
+            <div class="flex gap-3">
+              <input type="text" id="bedrock-server" placeholder="Enter server address (e.g., play.cubecraft.net)" 
+                     class="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button onclick="testBedrockServer()" 
+                      class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors">
+                Test
+              </button>
+            </div>
+            <div id="bedrock-result" class="mt-4"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Server Favicon Endpoint -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">GET</span>
+          <code class="code text-lg font-semibold text-slate-900 dark:text-slate-100">/api/png/{serverAddress}</code>
+        </div>
+        
+        <p class="text-slate-600 dark:text-slate-400 mb-6">
+          Get the server favicon as a PNG image (Java Edition only).
+        </p>
+        
+        <div class="space-y-6">
+          <!-- Parameters -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Parameters</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <div class="flex items-center gap-3 mb-2">
+                <code class="code text-sm bg-slate-200 dark:bg-slate-700 px-2 py-1 rounded">serverAddress</code>
+                <span class="text-xs text-slate-500 dark:text-slate-400">string</span>
+                <span class="text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-2 py-1 rounded">required</span>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Server hostname or IP address with optional port.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Example -->
+          <div>
+            <h4 class="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">Example</h4>
+            <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+              <code class="code text-sm text-blue-600 dark:text-blue-400">
+                /api/png/hypixel.net
+              </code>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+                Returns a PNG image or JSON error if no favicon is available.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error Responses -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8">
+        <h2 class="text-2xl font-bold mb-6 text-slate-900 dark:text-slate-100">❌ Error Responses</h2>
+        
+        <div class="space-y-4">
+          <div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4">
+            <h4 class="font-semibold mb-2 text-slate-800 dark:text-slate-200">Common Error Format</h4>
+            <pre class="code text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"><code>{
   "success": false,
   "error": {
     "code": "timeout",
     "message": "Connection to server timed out"
   }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "invalid_domain",
-    "message": "The domain name could not be resolved"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "connection_refused",
-    "message": "Server refused the connection"
-  }
-}</pre>
-      <pre>{
-  "success": false,
-  "error": {
-    "code": "offline",
-    "message": "Server appears to be offline or unreachable"
-  }
-}</pre>
+}</code></pre>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+              <h5 class="font-semibold text-red-800 dark:text-red-200 mb-2">timeout</h5>
+              <p class="text-sm text-red-700 dark:text-red-300">Connection to server timed out</p>
+            </div>
+            
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+              <h5 class="font-semibold text-red-800 dark:text-red-200 mb-2">invalid_domain</h5>
+              <p class="text-sm text-red-700 dark:text-red-300">The domain name could not be resolved</p>
+            </div>
+            
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+              <h5 class="font-semibold text-red-800 dark:text-red-200 mb-2">connection_refused</h5>
+              <p class="text-sm text-red-700 dark:text-red-300">Server refused the connection</p>
+            </div>
+            
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+              <h5 class="font-semibold text-red-800 dark:text-red-200 mb-2">offline</h5>
+              <p class="text-sm text-red-700 dark:text-red-300">Server appears to be offline or unreachable</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
-  <script src="/script.js"></script>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center">
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+      Made with by 
+      <a href="https://github.com/EducatedSuddenBucket" 
+         class="text-blue-600 dark:text-blue-400 hover:underline">
+        EducatedSuddenBucket
+      </a>
+    </p>
+    <p class="text-sm text-slate-500 dark:text-slate-400">
+      Hosted with by 
+      <a href="https://krnk.org" 
+         class="text-blue-600 dark:text-blue-400 hover:underline">
+        KuronekoServer
+      </a>
+    </p>
+  </footer>
+
   <script>
-    // Initialize theme toggle only
-    setupThemeToggle();
+    // Theme management
+    class ThemeManager {
+      constructor() {
+        this.themeToggle = document.getElementById('theme-toggle');
+        this.init();
+      }
+
+      init() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          this.setDarkMode();
+        } else {
+          this.setLightMode();
+        }
+
+        this.themeToggle.addEventListener('click', () => this.toggle());
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+              this.setDarkMode();
+            } else {
+              this.setLightMode();
+            }
+          }
+        });
+      }
+
+      toggle() {
+        if (document.documentElement.classList.contains('dark')) {
+          this.setLightMode();
+        } else {
+          this.setDarkMode();
+        }
+      }
+
+      setDarkMode() {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+
+      setLightMode() {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // API Testing functions
+    async function testJavaServer() {
+      const serverInput = document.getElementById('java-server');
+      const resultDiv = document.getElementById('java-result');
+      const serverAddress = serverInput.value.trim();
+      
+      if (!serverAddress) {
+        showResult(resultDiv, { error: 'Please enter a server address' }, true);
+        return;
+      }
+      
+      showLoading(resultDiv);
+      
+      try {
+        const response = await fetch(`/api/status/${encodeURIComponent(serverAddress)}`);
+        const data = await response.json();
+        showResult(resultDiv, data, !data.success);
+      } catch (error) {
+        showResult(resultDiv, { error: 'Network error: ' + error.message }, true);
+      }
+    }
+
+    async function testBedrockServer() {
+      const serverInput = document.getElementById('bedrock-server');
+      const resultDiv = document.getElementById('bedrock-result');
+      const serverAddress = serverInput.value.trim();
+      
+      if (!serverAddress) {
+        showResult(resultDiv, { error: 'Please enter a server address' }, true);
+        return;
+      }
+      
+      showLoading(resultDiv);
+      
+      try {
+        const response = await fetch(`/api/status/bedrock/${encodeURIComponent(serverAddress)}`);
+        const data = await response.json();
+        showResult(resultDiv, data, !data.success);
+      } catch (error) {
+        showResult(resultDiv, { error: 'Network error: ' + error.message }, true);
+      }
+    }
+
+    function showLoading(element) {
+      element.innerHTML = `
+        <div class="flex items-center justify-center p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
+          <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+          <span class="ml-3 text-slate-600 dark:text-slate-300">Testing...</span>
+        </div>
+      `;
+    }
+
+    function showResult(element, data, isError = false) {
+      const bgColor = isError ? 'bg-red-50 dark:bg-red-900/20' : 'bg-green-50 dark:bg-green-900/20';
+      const textColor = isError ? 'text-red-800 dark:text-red-200' : 'text-green-800 dark:text-green-200';
+      
+      element.innerHTML = `
+        <div class="${bgColor} rounded-lg p-4">
+          <h5 class="font-semibold ${textColor} mb-2">${isError ? 'Error' : 'Success'}</h5>
+          <pre class="code text-sm text-slate-800 dark:text-slate-200 overflow-x-auto"><code>${JSON.stringify(data, null, 2)}</code></pre>
+        </div>
+      `;
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new ThemeManager();
+    });
   </script>
 </body>
 </html>
